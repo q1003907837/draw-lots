@@ -81,14 +81,14 @@ export function createPermissionGuard(router: Router) {
     }
 
     // get userinfo while last fetch time is empty
-    if (userStore.getLastUpdateTime === 0) {
-      try {
-        await userStore.getUserInfoAction()
-      } catch (err) {
-        next()
-        return
-      }
-    }
+    // if (userStore.getLastUpdateTime === 0) {
+    //   try {
+    //     await userStore.getUserInfoAction()
+    //   } catch (err) {
+    //     next()
+    //     return
+    //   }
+    // }
 
     if (permissionStore.getIsDynamicAddedRoute) {
       next()

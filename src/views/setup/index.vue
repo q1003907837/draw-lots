@@ -1,50 +1,53 @@
 <template>
-  <Card>
-    <div class="person">
-      <template v-for="item in personList">
-        <div class="item" :class="item.type" ghost>
-          {{ item.name }}
-        </div>
-      </template>
-    </div>
-  </Card>
-  <Card class="card-cont">
-    <div class="wrap">
-      <div class="left">
-        <template v-for="item in personLeft">
-          <div class="item">
-            <div class="img"> <Avatar :size="50" :src="item.img" /> </div>
-            <div class="txt">
-              {{ item.name }}
-            </div>
+  <div>
+    <Card>
+      <div class="person">
+        <template v-for="item in personList">
+          <div class="item" :class="item.type" ghost>
+            {{ item.name }}
           </div>
         </template>
       </div>
-      <div class="center">
-        <div class="icon" @click="reset">
-          <UndoOutlined />
-        </div>
-        <Button class="btn" block size="large" @click="goBallot">抽签</Button>
-      </div>
-      <div class="right">
-        <template v-for="item in personRight">
-          <div class="item">
-            <div class="img"> <Avatar :size="50" :src="item.img" /> </div>
-            <div class="txt">
-              {{ item.name }}
+    </Card>
+    <Card class="card-cont">
+      <div class="wrap">
+        <div class="left">
+          <template v-for="item in personLeft">
+            <div class="item">
+              <div class="img"> <Avatar :size="50" :src="item.img" /> </div>
+              <div class="txt">
+                {{ item.name }}
+              </div>
             </div>
+          </template>
+        </div>
+        <div class="center">
+          <div class="icon" @click="reset">
+            <UndoOutlined />
           </div>
-        </template>
+          <Button class="btn" block size="large" @click="goBallot">抽签</Button>
+        </div>
+        <div class="right">
+          <template v-for="item in personRight">
+            <div class="item">
+              <div class="img"> <Avatar :size="50" :src="item.img" /> </div>
+              <div class="txt">
+                {{ item.name }}
+              </div>
+            </div>
+          </template>
+        </div>
       </div>
-    </div>
-  </Card>
+    </Card>
+  </div>
 </template>
 <script lang="ts" setup>
   import { Card, Button, Avatar } from 'ant-design-vue'
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import { shuffle, cloneDeep } from 'lodash-es'
   import { UndoOutlined } from '@ant-design/icons-vue'
   import { groupData } from './data'
+  import { UserListApi } from '/@/api/sys/base'
 
   const clonePerson = cloneDeep(groupData.personList)
 
@@ -67,6 +70,7 @@
     personLeft.value = sort.slice(0, 5)
     //right
     personRight.value = sort.slice(5, 10)
+    console.log(personList.value)
   }
   //重置
   function reset() {
@@ -74,6 +78,16 @@
     personLeft.value = groupData.person
     personRight.value = groupData.person
   }
+
+  const getList = () => {
+    UserListApi().then((res) => {
+      console.log(res)
+    })
+  }
+
+  onMounted(() => {
+    // getList()
+  })
 </script>
 <style lang="less" scoped>
   .person {

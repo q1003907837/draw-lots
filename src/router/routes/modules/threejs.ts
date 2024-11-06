@@ -3,25 +3,24 @@ import type { AppRouteModule } from '/@/router/types'
 import { LAYOUT } from '/@/router/constant'
 import { t } from '/@/hooks/web/useI18n'
 
-const setup: AppRouteModule = {
-  path: '/setup',
-  name: 'SetupDemo',
+const vr: AppRouteModule = {
+  path: '/vr',
+  name: 'Vr',
   component: LAYOUT,
-  redirect: '/setup/index',
+  redirect: '/vr/index',
   meta: {
-    orderNo: 1,
+    orderNo: 2,
     hideChildrenInMenu: true,
-    icon: 'lucide-lab:flower-lotus',
-    title: '抽签',
-    // hideMenu: true,
+    icon: 'fa6-solid:house-fire',
+    title: 'vr看房',
   },
   children: [
     {
       path: 'index',
-      name: 'SetupDemoPage',
-      component: () => import('/@/views/setup/index.vue'),
+      name: 'VrIndex',
+      component: () => import('/@/views/vr/index.vue'),
       meta: {
-        title: '抽签',
+        title: 'vr看房',
         icon: 'whh:paintroll',
         hideMenu: true,
       },
@@ -29,4 +28,4 @@ const setup: AppRouteModule = {
   ],
 }
 
-export default setup
+export default vr

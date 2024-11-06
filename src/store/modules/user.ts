@@ -90,20 +90,24 @@ export const useUserStore = defineStore({
     ): Promise<GetUserInfoModel | null> {
       try {
         const { goHome = true, mode, ...loginParams } = params
-        const data = await loginApi(loginParams, mode)
-        const { token } = data
+        // const data = await loginApi(loginParams, mode)
+        // const { token } = data
 
         // save token
-        this.setToken(token)
-        return this.afterLoginAction(goHome)
+        // this.setToken(token)
+        this.setToken('1111111111')
+        // return this.afterLoginAction(goHome)
+        router.replace('/home/index')
       } catch (error) {
-        return Promise.reject(error)
+        // return Promise.reject(error)
+        // return this.afterLoginAction(goHome)
+        router.replace('/home/index')
       }
     },
     async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
       if (!this.getToken) return null
       // get user info
-      const userInfo = await this.getUserInfoAction()
+      // const userInfo = await this.getUserInfoAction()
 
       const sessionTimeout = this.sessionTimeout
       if (sessionTimeout) {
