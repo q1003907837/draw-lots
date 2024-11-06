@@ -1,1 +1,0 @@
-import{a as o,o as t,f as s,h as e}from"./index.adfa4d48.js";const a={class:"md:flex"},n=e("template",null,[e("div",null,"1")],-1),_=[n],p=o({__name:"GrowCard",props:{loading:{type:Boolean}},setup(c){return(l,r)=>(t(),s("div",a,_))}});export{p as default};
